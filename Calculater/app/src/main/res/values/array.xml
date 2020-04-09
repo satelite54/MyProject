@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_purpose">
+        <item>주택용(저압)</item>
+        <item>주택용(고압)</item>
+    </string-array>
+
+    <string-array name="array_large_family_life_support_system">
+        <item>해당없음</item>
+        <item>5인 이상가구</item>
+        <item>출산 가구</item>
+        <item>3자녀 이상가구</item>
+        <item>생명유지 장치</item>
+    </string-array>
+
+    <string-array name="array_welfare_discount">
+        <item>해당없음</item>
+        <item>독립 유공자</item>
+        <item>국가 유공자</item>
+        <item>5.18민주 유공자</item>
+        <item>장애인</item>
+        <item>기초 생활 수급(생계, 의료)</item>
+        <item>기초 생활 수급(주거, 교육)</item>
+        <item>차상위 계층</item>
+        <item>사회복지시설</item>
+    </string-array>
+
+    <string-array name="arrayWhen_to_use">
+        <item>12월~2월</item>
+        <item>3월~5월</item>
+        <item>6월</item>
+        <item>7,8월(하계)</item>
+        <item>9~11월</item>
+    </string-array>
+
+</resources>
