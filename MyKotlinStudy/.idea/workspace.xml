@@ -11,6 +11,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -31,16 +32,16 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
-  <component name="RunManager" selected="Kotlin.chap06.section2.DelegatedPropertyVetoableKt">
-    <configuration name="chap06.section2.DelegatedClassKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.KCustomerAccess">
+    <configuration name="KCustomerAccess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chap06.section3.KCustomerAccess" />
       <module name="MyKotlinStudy" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="chap06.section2.DelegatedClassKt" />
-      <option name="WORKING_DIRECTORY" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chap06.section3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -71,11 +72,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="chap06.section3.CompanionObjectTestKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="MyKotlinStudy" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="chap06.section3.CompanionObjectTestKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="chap06.section3.CustomerAccessKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="MyKotlinStudy" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="chap06.section3.CustomerAccessKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.KCustomerAccess" />
+        <item itemvalue="Kotlin.chap06.section3.CustomerAccessKt" />
+        <item itemvalue="Kotlin.chap06.section3.CompanionObjectTestKt" />
         <item itemvalue="Kotlin.chap06.section2.DelegatedPropertyVetoableKt" />
         <item itemvalue="Kotlin.chap06.section2.DelegatedPropertyKt" />
-        <item itemvalue="Kotlin.chap06.section2.DelegatedClassKt" />
       </list>
     </recent_temporary>
   </component>
@@ -101,25 +130,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1021" y="304" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586602363115" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1586603955325">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1586606263357">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586603955325" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1586603955325">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586606263357" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1586606263357">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586603955325" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1586603955325">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586606263357" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1586606263357">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586603955325" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1586603955325">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586606263357" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1586606263357">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586603955325" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586606263357" />
     <state x="829" y="90" key="SettingsEditor" timestamp="1586602392713">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="829" y="90" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586602392713" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586605935943">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586605935943" />
   </component>
 </project>
