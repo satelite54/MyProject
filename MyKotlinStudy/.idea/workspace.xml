@@ -29,6 +29,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RunManager">
     <configuration name="chap06.section2.DelegatedClassKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
@@ -68,5 +69,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="692" y="228" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1586600170623" />
+    <state x="1021" y="304" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1586602363115">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1021" y="304" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586602363115" />
+    <state x="829" y="90" key="SettingsEditor" timestamp="1586602392713">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="829" y="90" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586602392713" />
   </component>
 </project>
