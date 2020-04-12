@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vibrator.calculater">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MyAppsApplication"
         android:allowBackup="true"
@@ -10,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id"/>
         <activity android:name=".Main3Activity"></activity>
         <activity android:name=".Main2Activity" />
         <activity android:name=".MainActivity">

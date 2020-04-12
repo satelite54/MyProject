@@ -24,7 +24,7 @@ fun main () {
     //Q1s
 
     val PersonName: PersonName
-    
+
 //    var name = "hongKildong"
 //    var age = 14
 //    var USER = User(name, age)

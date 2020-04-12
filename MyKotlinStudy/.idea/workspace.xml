@@ -32,22 +32,9 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
-  <component name="RunManager" selected="Kotlin.chap06.section3.TestKt">
+  <component name="RunManager" selected="Kotlin.chap07.section01.AbstractObjectKt">
     <configuration name="OCustomerAccess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="chap06.section3.OCustomerAccess" />
-      <module name="MyKotlinStudy" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="chap06.section3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PackageLevelAccess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="chap06.section3.PackageLevelAccess" />
       <module name="MyKotlinStudy" />
       <extension name="coverage">
         <pattern>
@@ -72,19 +59,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="chap06.section3.ObjectDeclarationKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="MyKotlinStudy" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="chap06.section3.ObjectDeclarationKt" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="chap06.section3.TestKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="MyKotlinStudy" />
       <option name="VM_PARAMETERS" />
@@ -98,13 +72,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="chap07.section01.AbstractObjectKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="MyKotlinStudy" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="chap07.section01.AbstractObjectKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="chap07.section01.AbstractVehicleKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="MyKotlinStudy" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="chap07.section01.AbstractVehicleKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.chap07.section01.AbstractObjectKt" />
+        <item itemvalue="Kotlin.chap07.section01.AbstractVehicleKt" />
         <item itemvalue="Kotlin.chap06.section3.TestKt" />
         <item itemvalue="Kotlin.chap06.section3.ObjeckExprssionSuperManKt" />
         <item itemvalue="Application.OCustomerAccess" />
-        <item itemvalue="Kotlin.chap06.section3.ObjectDeclarationKt" />
-        <item itemvalue="Application.PackageLevelAccess" />
       </list>
     </recent_temporary>
   </component>
@@ -130,22 +130,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1021" y="304" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586602363115" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1586663500430">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1586666596377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586663500430" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1586663500430">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586666596377" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1586666596377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586663500430" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1586663500429">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586666596377" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1586666596377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586663500429" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1586663500430">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586666596377" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1586666596377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586663500430" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586666596377" />
     <state x="829" y="90" key="SettingsEditor" timestamp="1586602392713">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
