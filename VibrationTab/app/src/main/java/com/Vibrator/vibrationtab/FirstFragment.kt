@@ -59,29 +59,33 @@ class FirstFragment : Fragment() {
             val amplitudes5 = intArrayOf(0, 255, 0, 0)
 
             this.vib = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            btn_push = true
 
             when (radioGroup1.checkedRadioButtonId) {
                 radioButton1.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings1, amplitudes1, 1))
+                    btn_push = true
                 }
                 radioButton2.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings2, amplitudes2, 1))
+                    btn_push = true
                 }
                 radioButton3.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings3, amplitudes3, 1))
+                    btn_push = true
                 }
                 radioButton4.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings4, amplitudes4, 1))
+                    btn_push = true
                 }
                 radioButton5.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings5, amplitudes5, 1))
+                    btn_push = true
                 }
             }
         }
         btn_Stop.setOnClickListener {
-            btn_push = false
-            vib.cancel()
+            if(btn_push)
+                vib.cancel()
         }
     }
 }
