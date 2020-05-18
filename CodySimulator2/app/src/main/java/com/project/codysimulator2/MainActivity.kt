@@ -8,57 +8,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-//class MainActivity : AppCompatActivity() {
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//
-//        // Example of a call to a native method
-//        class MainActivity : AppCompatActivity() {
-//            private var bottomNavigationView // 바텀 네비게이션 뷰
-//                    : BottomNavigationView? = null
-//            private var fm: FragmentManager? = null
-//            private var ft: FragmentTransaction? = null
-//            private var frag1: cody_frag? = null
-//            private var frag2: Server_frag? = null
-//            override fun onCreate(savedInstanceState: Bundle?) {
-//                super.onCreate(savedInstanceState)
-//                setContentView(R.layout.activity_main)
-//                bottomNavigationView = findViewById(R.id.bottomNavi)
-//                bottomNavigationView?.setOnNavigationItemSelectedListener(object :
-//                    BottomNavigationView.OnNavigationItemSelectedListener {
-//                    override fun onNavigationItemSelected(@NonNull menuItem: MenuItem): Boolean {
-//                        when (menuItem.itemId) {
-//                            R.id.action_today -> setFrag(0)
-//                            R.id.action_add -> setFrag(1)
-//                        }
-//                        return true
-//                    }
-//                })
-//                frag1 = cody_frag()
-//                frag2 = Server_frag()
-//                setFrag(0) // 첫 프래그먼트 화면 지정
-//            }
-//
-//            // 프레그먼트 교체
-//            private fun setFrag(n: Int) {
-//                fm = supportFragmentManager
-//                ft = fm!!.beginTransaction()
-//                when (n) {
-//                    0 -> {
-//                        ft!!.replace(R.id.Main_Frame, cody_frag())
-//                        ft!!.commit()
-//                    }
-//                    1 -> {
-//                        ft!!.replace(R.id.Main_Frame, Server_frag())
-//                        ft!!.commit()
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 class MainActivity : AppCompatActivity() {
 
     private var bottomNavigationView // 바텀 네비게이션 뷰

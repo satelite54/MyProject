@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import kotlinx.android.synthetic.main.fragment_cody_frag.*
+import android.util.Log
+import android.view.MotionEvent
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -36,6 +38,35 @@ class cody_frag : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cody_frag, container, false)
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        imageView.setOnTouchListener{v: View, event: MotionEvent ->
+            val pWidth = (v.parent as ViewGroup).width
+            val pHeight = (v.parent as ViewGroup).height
+
+            if (event.action == MotionEvent.ACTION_MOVE) {
+                v.x = v.x + event.x - v.width / 2
+                v.y = v.y + event.y - v.height / 2
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                Log.d("bsjbsj", "detached...")
+                Log.d("bsjbsj", "v.x : ${v.x} + v.y : ${v.y} , v.x + v.width : ${v.x + v.width}, v.y + y.width : ${v.y + v.width}")
+                if (v.x < 0) {
+                    v.x = 0F
+                } else if (v.x + v.width > pWidth) {
+                    v.x = (pWidth - v.width).toFloat()
+                }
+                if (v.y < 0) {
+                    v.y = 0F
+                } else if (v.y + v.height > pHeight) {
+                    v.y = (pHeight - v.height).toFloat()
+                }
+            }
+            true
+        }
+    }
+
 
     companion object {
         /**
