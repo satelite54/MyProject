@@ -44,6 +44,7 @@ class cody_frag : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         imageView.setOnTouchListener { v: View, event: MotionEvent ->
             DragAndMove(v, event, imageView)
         }
@@ -87,6 +88,7 @@ class cody_frag : Fragment() {
         fun newInstance(param1: String, param2: String) =
             cody_frag().apply {
                 arguments = Bundle().apply {
+
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }

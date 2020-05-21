@@ -1,4 +1,4 @@
-package com.project.codysimulator2
+package com.project.codysimulator2 // Made by 김태헌
 
 import android.os.Bundle
 import android.view.MenuItem
