@@ -1,11 +1,12 @@
 package com.project.codysimulator2
 
+import android.content.ClipData
+import android.content.ClipDescription
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import java.io.FileNotFoundException
@@ -107,7 +108,13 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
 
         return if (event?.action == MotionEvent.ACTION_DOWN) {
             val dragShadowBuilder = View.DragShadowBuilder(v)
-            view?.startDrag(null, dragShadowBuilder, v, 0)
+
+            val item: ClipData.Item = ClipData.Item(v!!.tag as CharSequence)
+            val mimeTypes =
+                arrayOf<String>(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            val data = ClipData(tag, mimeTypes, item)
+
+            view?.startDrag(data, dragShadowBuilder, v, 0)
             true
         } else {
             false
@@ -121,24 +128,23 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
 
-                if (dragData == "ImageTag1") { // this gets jpg image from "drawable" folder,
+                if (dragData == "ImageView1") { // this gets jpg image from "drawable" folder,
 //      set ImageView appropriately for your usage
-                    (v as ImageView).setImageResource(android.R.drawable.image1)
-                } else if (dragData == "ImageTag2") {
-                    (v as ImageView).setImageResource(android.R.drawable.image2)
+                    (v as ImageView).setImageResource(R.drawable.blue_cloth)
+                } else if (dragData == "ImageView2") {
+                    (v as ImageView).setImageResource(R.drawable.blue_cloth)
                 }
-                break
 
-                val tvState = event.localState as View
-                val tvParent= tvState.parent as ViewGroup
-                tvParent.removeView(tvState)
-                val container = v as ConstraintLayout
-                container.addView(tvState)
-                tvParent.removeView(tvState)
-                tvState.x = event.x
-                tvState.y = event.y
-                v.addView(tvState)
-                v.setVisibility(View.VISIBLE)
+//                val tvState = event.localState as View
+//                val tvParent= tvState.parent as ViewGroup
+//                tvParent.removeView(tvState)
+//                val container = v as ConstraintLayout
+//                container.addView(tvState)
+//                tvParent.removeView(tvState)
+//                tvState.x = event.x
+//                tvState.y = event.y
+//                v.addView(tvState)
+//                v.setVisibility(View.VISIBLE)
                 return true
             }
             else -> return true // false를 리턴하게 되면 Drop 이벤트 수신못함.. ACTION_DRAG_STRATED 만 수신한다.
@@ -155,8 +161,8 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
     fun loadImageFromStorage(path: String, ImgCnt: Int) {
         try {
             val b: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.blue_cloth)
-            val img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
-            img.setTag("ImageTag$ImgCnt")
+            val img = view?.findViewById(R.id.imageView1 + ImgCnt - 1) as ImageView
+            img.setTag("ImageView$ImgCnt")
             img.setImageBitmap(b)
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
