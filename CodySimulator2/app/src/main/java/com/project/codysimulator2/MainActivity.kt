@@ -1,12 +1,19 @@
 package com.project.codysimulator2 // Made by 김태헌
 
+import android.content.ContentValues
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.annotation.NonNull
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+//import com.project.codysimulator2.MainActivity.Singleton.mLoaderCallbackTemp
+import org.opencv.android.BaseLoaderCallback
+import org.opencv.android.LoaderCallbackInterface
+import org.opencv.android.OpenCVLoader
+import org.opencv.core.CvType
+import org.opencv.core.Mat
+import org.opencv.core.Scalar
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,9 +24,47 @@ class MainActivity : AppCompatActivity() {
     private var frag1: cody_frag? = null
     private var frag2: Server_frag? = null
 
+    val mLoaderCallback: BaseLoaderCallback = object : BaseLoaderCallback(this) {
+        override fun onManagerConnected(status: Int) {
+            val TAG: String = "dsadsadsa"
+
+            when (status) {
+                LoaderCallbackInterface.SUCCESS -> {
+                    Log.i(TAG, "OpenCV Manager Connected")
+                    //from now onwards, you can use OpenCV API
+                    val m = Mat(5, 10, CvType.CV_8UC1, Scalar(0.0))
+                }
+                LoaderCallbackInterface.INIT_FAILED -> Log.i(TAG, "Init Failed")
+                LoaderCallbackInterface.INSTALL_CANCELED -> Log.i(
+                    TAG,
+                    "Install Cancelled"
+                )
+                LoaderCallbackInterface.INCOMPATIBLE_MANAGER_VERSION -> Log.i(
+                    TAG,
+                    "Incompatible Version"
+                )
+                LoaderCallbackInterface.MARKET_ERROR -> Log.i(
+                    TAG,
+                    "Market Error"
+                )
+                else -> {
+                    Log.i(TAG, "OpenCV Manager Install")
+                    super.onManagerConnected(status)
+                }
+            }
+        }
+    }
+
+//    object Singleton {
+//        lateinit var mLoaderCallbackTemp: BaseLoaderCallback
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        mLoaderCallbackTemp = mLoaderCallback
+
         bottomNavigationView = findViewById(R.id.bottomNavi)
         bottomNavigationView?.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -31,9 +76,19 @@ class MainActivity : AppCompatActivity() {
         frag1 = cody_frag()
         frag2 = Server_frag()
         setFrag(0) // 첫 프래그먼트 화면 지정
-        // Example of a call to a native method
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (!OpenCVLoader.initDebug()) {
+            Log.d(ContentValues.TAG, "onResume :: Internal OpenCV library not found.");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, mLoaderCallback);
+        } else {
+            Log.d(ContentValues.TAG, "onResum :: OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+    }
             // 프레그먼트 교체
     private fun setFrag(n: Int) {
         fm = supportFragmentManager
@@ -49,7 +104,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
