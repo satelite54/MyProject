@@ -49,7 +49,7 @@ class SecondFragment : Fragment() {
                     "진동 강도의 범위는 0 ~ 255로 설정해 주세요.",
                     Toast.LENGTH_SHORT
                 )
-                t1.show() 
+                t1.show()
             }
             else if(nIntensity < 0) {
                 var t1 = Toast.makeText(
