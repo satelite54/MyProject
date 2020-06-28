@@ -3,6 +3,8 @@
     package="com.project.codysimulator2" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="Android.permission.CAMERA" />
+    <uses-permission android:name="Android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
