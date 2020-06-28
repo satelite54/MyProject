@@ -1,7 +1,9 @@
 package com.Vibrator.vibrationtab// Made by 김태헌
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Vibrator
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.*
 import kotlinx.android.synthetic.main.activity_main.*

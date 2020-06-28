@@ -6,10 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="준비중이에요. ㅠㅁㅠ" />
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_Apply4"
+            android:layout_width="413dp"
+            android:layout_height="67dp"
+            android:text="APPLY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.998" />
+
+        <Button
+            android:id="@+id/btn_Stop4"
+            android:layout_width="411dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="280dp"
+            android:text="Stop"
+            app:layout_constraintBottom_toTopOf="@+id/btn_Apply4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="323dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="Please set the vibration intensity"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.246" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="145dp"
+            android:layout_height="22dp"
+            android:text="진동 주기 설정"
+            app:layout_constraintBottom_toTopOf="@+id/editTextNumber3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+            app:layout_constraintVertical_bias="0.534" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="145dp"
+            android:layout_height="22dp"
+            android:text="진동 강도 설정"
+            app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.944" />
+
+        <EditText
+            android:id="@+id/editTextNumber3"
+            android:layout_width="323dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="Please set the frequency."
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+            app:layout_constraintVertical_bias="0.139" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="379dp"
+            android:layout_height="111dp"
+            android:text="1. 진동 강도(0 ~ 255 값으로)를 설정해주세요.\n2. 진동 주기를 설정해주세요. (1000당 1초 입니다.)\n\n1. Set the vibration intensity (value from 0 to 255)\n2. Please set the frequency. (1 second per 1000)."
+            app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.101" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

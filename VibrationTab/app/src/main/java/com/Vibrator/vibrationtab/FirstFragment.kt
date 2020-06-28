@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.Vibrator.vibrationtab.FirstFragment.VibrationState.VibrationFlag
+import com.Vibrator.vibrationtab.FirstFragment.VibrationState.vib
 import kotlinx.android.synthetic.main.fragment_first.*
 
 
@@ -17,8 +19,11 @@ import kotlinx.android.synthetic.main.fragment_first.*
  * A simple [Fragment] subclass.
  */
 class FirstFragment : Fragment() {
-    lateinit var vib: Vibrator
-    var btn_push: Boolean = false
+
+    object VibrationState {
+        var VibrationFlag : Boolean = false
+        lateinit var vib: Vibrator
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +39,7 @@ class FirstFragment : Fragment() {
 
     override fun onDestroy() { // 뒤로가기 누를 시 호출
         super.onDestroy()
-        if(btn_push)
+        if(VibrationFlag)
             vib.cancel()
     }
 
@@ -58,34 +63,36 @@ class FirstFragment : Fragment() {
             val timings5 = longArrayOf(100, 200, 0, 200)  // 0.2초 진동 후 0.2초 대기
             val amplitudes5 = intArrayOf(0, 255, 0, 0)
 
-            this.vib = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vib = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
             when (radioGroup1.checkedRadioButtonId) {
                 radioButton1.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings1, amplitudes1, 1))
-                    btn_push = true
+                    VibrationFlag = true
                 }
                 radioButton2.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings2, amplitudes2, 1))
-                    btn_push = true
+                    VibrationFlag = true
                 }
                 radioButton3.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings3, amplitudes3, 1))
-                    btn_push = true
+                    VibrationFlag = true
                 }
                 radioButton4.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings4, amplitudes4, 1))
-                    btn_push = true
+                    VibrationFlag = true
                 }
                 radioButton5.id -> {
                     vib.vibrate(VibrationEffect.createWaveform(timings5, amplitudes5, 1))
-                    btn_push = true
+                    VibrationFlag = true
                 }
             }
         }
         btn_Stop.setOnClickListener {
-            if(btn_push)
+            if(VibrationFlag) {
                 vib.cancel()
+                VibrationFlag = false
+            }
         }
     }
 }
