@@ -1,15 +1,16 @@
 package com.project.codysimulator2
 
-import android.app.Activity
-import android.content.ClipData
-import android.content.ClipDescription
-import android.content.Context
-import android.content.ContextWrapper
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import org.opencv.android.Utils
@@ -34,9 +35,11 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
     private var param2: String? = null
 
     private lateinit var mContext: Context
-    private lateinit var mActivity: Activity
 
     private lateinit var ImgView: ImageView
+    private val REQUEST_CODE = 0
+
+    var ImgLoadFlag = false // 전체 이미지 로드
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,13 +136,85 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
             onDrag(v, event)
         }
 
-        button_Save.setOnClickListener {
-            for(ImageCnt in 1..8) {
-                var Img = view?.findViewById(R.id.imageView1 + ImageCnt - 1) as ImageView
-                var ImgName: String = "Cloth_${ImageCnt}"
-                createDirectoryAndSaveFile(Img, ImgName, ImageCnt)
+        button_Load.setOnClickListener {
+            ImgLoadFlag = true
+            onClick(button_Load)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    val `in`: InputStream? = data!!.data?.let {
+                        context?.contentResolver?.openInputStream(
+                            it
+                        )
+                    }
+                    val img =
+                        BitmapFactory.decodeStream(`in`)
+                    if (`in` != null) {
+                        `in`.close()
+                    }
+                    if(ImgLoadFlag == true) { // 뷰간 이미지 복사 // 이미지 로드시 밀어낸다.
+                        var filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_1")
+                        var fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_2")
+                        var ImgName: String = "Cloth_1"
+
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_7")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_8")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_8"
+                        loadImageFromStorage(ImgName, 8)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_6")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_7")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_7"
+                        loadImageFromStorage(ImgName, 7)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_5")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_6")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_6"
+                        loadImageFromStorage(ImgName, 6)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_4")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_5")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_5"
+                        loadImageFromStorage(ImgName, 5)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_3")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_4")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_4"
+                        loadImageFromStorage(ImgName, 4)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_2")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_3")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_3"
+                        loadImageFromStorage(ImgName, 3)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_1")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_2")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_2"
+                        loadImageFromStorage(ImgName, 2)
+                    }
+                    var strImgName = "Cloth_1"
+                    imageView1.setImageBitmap(img)
+                    createDirectoryAndSaveFile(imageView1, strImgName)
+                } catch (e: java.lang.Exception) {
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                ImgLoadFlag = false
+                Toast.makeText(activity!!.applicationContext, "사진 선택 취소", Toast.LENGTH_LONG)
+                    .show()
             }
         }
+    }
+
+    fun onClick(b: Button?) {
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -286,7 +361,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         }
     }
 
-    fun createDirectoryAndSaveFile(v: View, fileName: String, ImageCnt: Int) {
+    fun createDirectoryAndSaveFile(v: View, fileName: String) {
         val cw = ContextWrapper(requireActivity().applicationContext)
         // path to /data/data/yourapp/app_data/imageDir
         val direct: File = cw.getDir("imageDir", Context.MODE_PRIVATE)
@@ -299,8 +374,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
             file.delete()
         }
 
-        v.buildDrawingCache()
-        val bitmap: Bitmap = v.drawingCache
+        val bitmap: Bitmap = getBitmapFromView(v)
 
         try {
             val out = FileOutputStream(file)
@@ -310,6 +384,17 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun getBitmapFromView(v: View): Bitmap {
+
+        val b = Bitmap.createBitmap(
+            v.width, v.height,
+            Bitmap.Config.ARGB_8888
+        )
+        val c = Canvas(b)
+        v.draw(c)
+        return b
     }
 
     fun removeBackground(bitmap: Bitmap): Bitmap { //GrabCut 부분
@@ -326,10 +411,11 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         val fgdModel = Mat()
         val bgdModel = Mat()
         val imgC3 = Mat()
+
         Imgproc.cvtColor(img, imgC3, Imgproc.COLOR_RGBA2RGB)
         Imgproc.grabCut(imgC3, mask, rect, bgdModel, fgdModel, 5, Imgproc.GC_INIT_WITH_RECT)
-        val source = Mat(1, 1, CvType.CV_8U, Scalar(3.0))
-        Core.compare(mask, source /* GC_PR_FGD */, mask, Core.CMP_EQ)
+        val source = Mat(1, 1, CvType.CV_8U, Scalar.all(3.0)) //2 객체 제거 3 객체 인식
+        Core.compare(mask, source , mask, Core.CMP_EQ)
         //이 부분이 중요함. 스칼라 사용 Scalar(255,255, 255,255), not Scalar(255,255,255)
         val foreground = Mat(
             img.size(), CvType.CV_8UC3, Scalar(
