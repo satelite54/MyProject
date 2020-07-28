@@ -1,19 +1,36 @@
 package com.project.codysimulator2 // Made by 김태헌
 
+//import com.project.codysimulator2.MainActivity.Singleton.mLoaderCallbackTemp
+import android.Manifest.permission.CAMERA
+import android.Manifest.permission_group.CAMERA
 import android.content.ContentValues
+import android.content.pm.PackageManager
+import android.graphics.Camera
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-//import com.project.codysimulator2.MainActivity.Singleton.mLoaderCallbackTemp
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import org.opencv.android.BaseLoaderCallback
 import org.opencv.android.LoaderCallbackInterface
 import org.opencv.android.OpenCVLoader
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 import org.opencv.core.Scalar
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.jar.Manifest
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,10 +72,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    object Singleton {
-//        lateinit var mLoaderCallbackTemp: BaseLoaderCallback
-//    }
-
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -104,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.

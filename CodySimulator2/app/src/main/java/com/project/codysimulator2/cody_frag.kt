@@ -11,12 +11,16 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import org.opencv.android.Utils
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
 import java.io.*
+import java.text.SimpleDateFormat
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -437,6 +441,66 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
     override fun onDestroy() {
         super.onDestroy()
 //        if (mOpenCvCameraView != null) mOpenCvCameraView.disableView()
+    }
+
+    fun settingPermission(){
+        var permis = object  : PermissionListener {
+            //            어떠한 형식을 상속받는 익명 클래스의 객체를 생성하기 위해 다음과 같이 작성
+            override fun onPermissionGranted() {
+                Toast.makeText(this@MainActivity, "권한 허가", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Toast.makeText(this@MainActivity, "권한 거부", Toast.LENGTH_SHORT)
+                    .show()
+                ActivityCompat.finishAffinity(this@MainActivity) // 권한 거부시 앱 종료
+            }
+        }
+
+        TedPermission.with(this)
+            .setPermissionListener(permis)
+            .setRationaleMessage("카메라 사진 권한 필요")
+            .setDeniedMessage("카메라 권한 요청 거부")
+            .setPermissions(
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA)
+            .check()
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile() : File {
+        val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date()) // 파일 이름 설정
+        val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply{
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    fun startCapture(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile: File? = try{
+                    createImageFile()
+                }catch(ex:IOException){
+                    null
+                }
+                photoFile?.also{
+                    val photoURI : Uri = FileProvider.getUriForFile(
+                        this,
+                        "org.techtown.capturepicture.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
     }
 
     companion object {
