@@ -11,16 +11,12 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import org.opencv.android.Utils
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
 import java.io.*
-import java.text.SimpleDateFormat
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -70,8 +66,8 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
 
         // Sets the drag event listener for the View
 
-        // 맨 처음 디폴트 이미지 저장
-        for(ImageCnt in 1..8) {
+        // 맨 처음 디폴트 이미지 로드
+        for(ImageCnt in 1..14) {
             var FileExistFlag: Boolean = false
             val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_$ImageCnt")
             if(!f.exists()) { // 파일이 없으면
@@ -83,6 +79,12 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                 imageView6.setImageResource(R.drawable.blue_cloth)
                 imageView7.setImageResource(R.drawable.blue_cloth)
                 imageView8.setImageResource(R.drawable.blue_cloth)
+                imageView9.setImageResource(R.drawable.blue_cloth)
+                imageView10.setImageResource(R.drawable.blue_cloth)
+                imageView11.setImageResource(R.drawable.blue_cloth)
+                imageView12.setImageResource(R.drawable.blue_cloth)
+                imageView13.setImageResource(R.drawable.blue_cloth)
+                imageView14.setImageResource(R.drawable.blue_cloth)
             }
         }
 
@@ -133,10 +135,46 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         imageView8.setOnTouchListener { v, event: MotionEvent ->
             onTouch(v, event)
         }
-//        imageView8.setOnDragListener { v, event:DragEvent ->
-//            onDrag(v, event)
-//        }
-        imageView9.setOnDragListener { v, event: DragEvent ->
+        imageView8.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView9.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView9.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView10.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView10.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView11.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView11.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView12.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView12.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView13.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView13.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView14.setOnTouchListener { v, event: MotionEvent ->
+            onTouch(v, event)
+        }
+        imageView14.setOnDragListener { v, event:DragEvent ->
+            onDrag(v, event)
+        }
+        imageView15.setOnDragListener { v, event: DragEvent ->
             onDrag(v, event)
         }
 
@@ -165,6 +203,36 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                         var fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_2")
                         var ImgName: String = "Cloth_1"
 
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_13")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_14")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_14"
+                        loadImageFromStorage(ImgName, 14)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_12")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_13")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_13"
+                        loadImageFromStorage(ImgName, 13)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_11")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_12")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_12"
+                        loadImageFromStorage(ImgName, 12)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_10")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_11")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_11"
+                        loadImageFromStorage(ImgName, 11)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_9")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_10")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_10"
+                        loadImageFromStorage(ImgName, 10)
+                        filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_8")
+                        fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_9")
+                        filePre.renameTo(fileNow)
+                        ImgName = "Cloth_9"
+                        loadImageFromStorage(ImgName, 9)
                         filePre = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_7")
                         fileNow = File("/data/data/com.project.codysimulator2/app_imageDir","Cloth_8")
                         filePre.renameTo(fileNow)
@@ -245,7 +313,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
 
-                if (v!!.tag == "ImageView9") {
+                if (v!!.tag == "ImageView15") {
                     if (dragData == "ImageView1") {
                         val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_1")
                         if(f.exists()) {
@@ -317,6 +385,66 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                             }
                         }
                     }
+                    else if (dragData == "ImageView9") {
+                        if (dragData == "ImageView9") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_9")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
+                    else if (dragData == "ImageView10") {
+                        if (dragData == "ImageView10") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_10")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
+                    else if (dragData == "ImageView11") {
+                        if (dragData == "ImageView11") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_11")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
+                    else if (dragData == "ImageView12") {
+                        if (dragData == "ImageView12") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_12")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
+                    else if (dragData == "ImageView13") {
+                        if (dragData == "ImageView13") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_13")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
+                    else if (dragData == "ImageView14") {
+                        if (dragData == "ImageView14") {
+                            val f = File("/data/data/com.project.codysimulator2/app_imageDir", "Cloth_14")
+                            if(f.exists()) {
+                                var b = BitmapFactory.decodeStream(FileInputStream(f))
+                                b = removeBackground(b)
+                                (v as ImageView).setImageBitmap(b)
+                            }
+                        }
+                    }
                 }
                 return true
             }
@@ -330,7 +458,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
     }
 
     fun LoadImageView() {// 맨 처음 로드
-        for (ImgCnt in 1..8) { // 8번 반복
+        for (ImgCnt in 1..14) { // 14번 반복
             var ImgName: String = "Cloth_$ImgCnt"
             loadImageFromStorage(ImgName, ImgCnt)
         }
@@ -344,7 +472,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                 var img = view?.findViewById(R.id.imageView1 + ImgCnt - 1) as ImageView
                 img.setTag("ImageView$ImgCnt")
                 img.setImageBitmap(b)
-                if(ImgCnt == 8) {
+                if(ImgCnt == 14) {
                     img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
                     img.setTag("ImageView${ImgCnt + 1}")
                 }
@@ -355,7 +483,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                 var img = view?.findViewById(R.id.imageView1 + ImgCnt - 1) as ImageView
                 img.setTag("ImageView$ImgCnt")
                 img.setImageBitmap(b)
-                if(ImgCnt == 8) {
+                if(ImgCnt == 14) {
                     img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
                     img.setTag("ImageView${ImgCnt + 1}")
                 }
