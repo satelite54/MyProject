@@ -31,7 +31,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.jar.Manifest
 
-
 class MainActivity : AppCompatActivity() {
 
     private var bottomNavigationView // 바텀 네비게이션 뷰

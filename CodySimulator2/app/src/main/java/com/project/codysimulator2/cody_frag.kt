@@ -11,6 +11,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import org.opencv.android.Utils
@@ -487,6 +488,27 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                     img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
                     img.setTag("ImageView${ImgCnt + 1}")
                 }
+            }
+
+            for(FinishedCodyCnt in 1..8) {
+                val b = BitmapFactory.decodeResource(resources, R.drawable.blue_cloth)
+                val list = ArrayList<FinishedCodyItem>()
+                list.add(FinishedCodyItem(b, "getString(R.string.title01)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title02)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title03)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title04)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title05)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title06)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title07)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title08)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title09)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title10)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title01)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title02)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title03)"))
+//                list.add(FinishedCodyItem(b, "getString(R.string.title04)"))
+                val adapter = RecyclerAdapter(list)
+                recyclerView.adapter = adapter
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
