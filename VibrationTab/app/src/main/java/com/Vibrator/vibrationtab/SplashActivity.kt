@@ -11,7 +11,7 @@ import com.google.android.gms.ads.InterstitialAd
 
 class SplashActivity : AppCompatActivity() {
 
-    val SPLASH_VIEW_TIME: Long = 4000 //5초간 스플래시 화면을 보여줌 (ms)
+    val SPLASH_VIEW_TIME: Long = 2000 //5초간 스플래시 화면을 보여줌 (ms)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
