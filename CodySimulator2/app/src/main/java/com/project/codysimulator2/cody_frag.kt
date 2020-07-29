@@ -11,7 +11,6 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_cody_frag.*
 import org.opencv.android.Utils
@@ -67,6 +66,10 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
 
         // Sets the drag event listener for the View
 
+        for(ImageCnt in 1..15) { //  리소스가 꼬여서 다시 세팅..
+            var img = view?.findViewById(resources.getIdentifier("imageView${ImageCnt}", "id", "com.project.codysimulator2")) as ImageView
+            img.id = R.id.imageView1 + ImageCnt - 1
+        }
         // 맨 처음 디폴트 이미지 로드
         for(ImageCnt in 1..14) {
             var FileExistFlag: Boolean = false
@@ -90,6 +93,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         }
 
         LoadImageView()
+        LoadFinishedCodyView()
 
         imageView1.setOnDragListener { v, event: DragEvent ->
             onDrag(v, event)
@@ -175,6 +179,9 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         imageView14.setOnDragListener { v, event:DragEvent ->
             onDrag(v, event)
         }
+//        imageView15.setOnTouchListener { v, event: MotionEvent ->
+//
+//        }
         imageView15.setOnDragListener { v, event: DragEvent ->
             onDrag(v, event)
         }
@@ -304,6 +311,18 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
             true
         } else {
             false
+        }
+    }
+
+    fun ForTouchFixCloth(v: View) {
+        fun onTouch(v: View?, event: MotionEvent): Boolean {
+            val action = event.action
+            val curX = event.x
+            val curY = event.y
+            if (action == MotionEvent.ACTION_DOWN) {
+
+            }
+            return true
         }
     }
 
@@ -446,6 +465,7 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
                             }
                         }
                     }
+
                 }
                 return true
             }
@@ -465,50 +485,40 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
         }
     }
 
+    fun LoadFinishedCodyView() {
+        val b = BitmapFactory.decodeResource(resources, R.drawable.blue_cloth)
+        val list = ArrayList<FinishedCodyItem>()
+        for(FinishedCodyCnt in 1..8) {
+            list.add(FinishedCodyItem(b, "getString(R.string.title01)"))
+        }
+        val adapter = RecyclerAdapter(list)
+        recyclerView.adapter = adapter
+    }
+
     fun loadImageFromStorage(ImgName: String, ImgCnt: Int) {
         try {
             val f = File("/data/data/com.project.codysimulator2/app_imageDir", ImgName)
             if(f.exists()) {
                 val b = BitmapFactory.decodeStream(FileInputStream(f))
-                var img = view?.findViewById(R.id.imageView1 + ImgCnt - 1) as ImageView
+                var img = view?.findViewById(resources.getIdentifier("imageView${ImgCnt}", "id", "com.project.codysimulator2")) as ImageView
                 img.setTag("ImageView$ImgCnt")
                 img.setImageBitmap(b)
                 if(ImgCnt == 14) {
-                    img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
+                    var img = view?.findViewById(resources.getIdentifier("imageView${ImgCnt}", "id", "com.project.codysimulator2") + 1) as ImageView
                     img.setTag("ImageView${ImgCnt + 1}")
                 }
             }
             else {
+                var getID = 0
                 val b = BitmapFactory.decodeResource(resources, R.drawable.blue_cloth)
                 // 저장해놓은 파일이 없을 시
-                var img = view?.findViewById(R.id.imageView1 + ImgCnt - 1) as ImageView
+                var img = view?.findViewById(resources.getIdentifier("imageView${ImgCnt}", "id", "com.project.codysimulator2")) as ImageView
                 img.setTag("ImageView$ImgCnt")
                 img.setImageBitmap(b)
                 if(ImgCnt == 14) {
-                    img = view?.findViewById(R.id.imageView1 + ImgCnt) as ImageView
+                    img = view?.findViewById(resources.getIdentifier("imageView${ImgCnt}", "id", "com.project.codysimulator2") + 1) as ImageView
                     img.setTag("ImageView${ImgCnt + 1}")
                 }
-            }
-
-            for(FinishedCodyCnt in 1..8) {
-                val b = BitmapFactory.decodeResource(resources, R.drawable.blue_cloth)
-                val list = ArrayList<FinishedCodyItem>()
-                list.add(FinishedCodyItem(b, "getString(R.string.title01)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title02)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title03)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title04)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title05)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title06)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title07)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title08)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title09)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title10)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title01)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title02)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title03)"))
-//                list.add(FinishedCodyItem(b, "getString(R.string.title04)"))
-                val adapter = RecyclerAdapter(list)
-                recyclerView.adapter = adapter
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -541,7 +551,6 @@ class cody_frag : Fragment(), View.OnTouchListener, View.OnDragListener {
     }
 
     fun getBitmapFromView(v: View): Bitmap {
-
         val b = Bitmap.createBitmap(
             v.width, v.height,
             Bitmap.Config.ARGB_8888

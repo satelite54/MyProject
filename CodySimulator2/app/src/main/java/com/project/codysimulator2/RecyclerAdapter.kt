@@ -35,7 +35,7 @@ class RecyclerAdapter(private val items: ArrayList<FinishedCodyItem>) :
         private var view: View = v
 
         fun bind(listener: View.OnClickListener, item: FinishedCodyItem) {
-            view.thumbnail.setImageDrawable(item.image)
+            view.thumbnail.setImageBitmap(item.image)
             view.title.text = item.title
             view.setOnClickListener(listener)
         }
