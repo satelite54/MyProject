@@ -1,11 +1,14 @@
 package com.example.screamming.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -37,6 +40,9 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        loadData()
+
         var Screamming : SoundMeter = SoundMeter(activity!!.applicationContext)
         var ScreammingAdd : SoundMeter = SoundMeter(activity!!.applicationContext)
         var ScreammingAdd2 : SoundMeter = SoundMeter(activity!!.applicationContext)
@@ -87,12 +93,24 @@ class HomeFragment : Fragment() {
                             }
                         }
                         MaxAmplitude(AmplitudeToDb(Amplitude))
+                        saveData(AmplitudeToDb(Amplitude))
                         text_home.text = AmplitudeToDb(Amplitude).toString()
                     }
                 },
                 0,
                 500
             )
+        }
+        button2.setOnClickListener {
+            if(MaxAmplitude > 0) {
+                val intent = Intent(activity!!.applicationContext, EnterNickName::class.java)
+
+                startActivity(intent)
+            }
+            else {
+                var t1 = Toast.makeText(activity!!.applicationContext, "데시벨 측정을 먼저 해주세요!", Toast.LENGTH_SHORT)
+                t1.show()
+            }
         }
     }
 
@@ -121,6 +139,24 @@ class HomeFragment : Fragment() {
                 val gifImage = GlideDrawableImageViewTarget(rabbit)
                 Glide.with(activity!!.applicationContext).load(R.drawable.screamming).into(gifImage)
             }
+        }
+    }
+    
+    fun saveData(MaxDB: Double) // Max 데시벨을 저장하기 위한 용도
+    {
+        var ConvertDB  = MaxDB.toFloat()
+        val pref = PreferenceManager.getDefaultSharedPreferences(activity!!.applicationContext)
+        val editor = pref.edit()
+
+        editor.putFloat("KEY_MAXDB", ConvertDB)
+            .apply()
+    }
+    fun loadData() {
+        val pref = PreferenceManager.getDefaultSharedPreferences(activity!!.applicationContext)
+
+        val editText1 = pref.getFloat("KEY_MAXDB", 0f)
+        if(editText1 >= 0) {
+            text_home2.setText(editText1.toString())
         }
     }
 }
