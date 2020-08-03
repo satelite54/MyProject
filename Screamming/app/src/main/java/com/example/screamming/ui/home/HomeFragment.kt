@@ -14,10 +14,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import com.example.screamming.Data
 import com.example.screamming.R
+import com.example.screamming.ui.home.tempData.EnterNickNameFlag
+import com.example.screamming.ui.home.tempData.FragmentChangeFlag
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
+object tempData {
+    var FragmentChangeFlag = false
+    var EnterNickNameFlag = false
+}
 
 class HomeFragment : Fragment() {
 
@@ -37,12 +44,14 @@ class HomeFragment : Fragment() {
         })
         return root
     }
+    var t = Timer()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loadData()
-
+        var LoadMaxAmplitude = loadData()
+        Data.UserName = ""
+        Data.MaxAmplitude = LoadMaxAmplitude
         var Screamming : SoundMeter = SoundMeter(activity!!.applicationContext)
         var ScreammingAdd : SoundMeter = SoundMeter(activity!!.applicationContext)
         var ScreammingAdd2 : SoundMeter = SoundMeter(activity!!.applicationContext)
@@ -51,15 +60,20 @@ class HomeFragment : Fragment() {
         val time: Long = 10000
 
         button.setOnClickListener {
+            if(EnterNickNameFlag == true) { // 타이머 재생성
+                t = Timer()
+                EnterNickNameFlag = false
+            }
             val lastTime = System.currentTimeMillis()
-            var t = Timer()
             t.scheduleAtFixedRate(
                 object : TimerTask() {
                     override fun run() {
                         var currentTime = System.currentTimeMillis()
+
                         if((currentTime-lastTime) > time) {
                             Screamming.stop()
-                            text_home.text = "0"
+                            if(FragmentChangeFlag != true)
+                                text_home.text = "0"
                             t.cancel()
                         }
                         Screamming.start()
@@ -80,31 +94,41 @@ class HomeFragment : Fragment() {
                             Amplitude = 0.0
                         when(AmplitudeToDb(Amplitude)) {
                             in 40.0..60.0 -> {
-                                var Thread = ThreadClass()
-                                Thread.run()
+                                if(FragmentChangeFlag != true) {
+                                    var Thread = ThreadClass()
+                                    Thread.run()
+                                }
                             }
                             in 60.1..80.0 -> {
-                                var Thread = ThreadClass()
-                                Thread.run()
+                                if(FragmentChangeFlag != true) {
+                                    var Thread = ThreadClass()
+                                    Thread.run()
+                                }
                             }
                             in 80.1..100.0 -> {
-                                var Thread = ThreadClass()
-                                Thread.run()
+                                if(FragmentChangeFlag != true) {
+                                    var Thread = ThreadClass()
+                                    Thread.run()
+                                }
                             }
                         }
                         MaxAmplitude(AmplitudeToDb(Amplitude))
                         saveData(AmplitudeToDb(Amplitude))
-                        text_home.text = AmplitudeToDb(Amplitude).toString()
+                        var Data = Data
+                        Data.MaxAmplitude = AmplitudeToDb(Amplitude)
+                        if(FragmentChangeFlag != true)
+                            text_home.text = AmplitudeToDb(Amplitude).toString()
                     }
                 },
                 0,
                 500
             )
         }
+
         button2.setOnClickListener {
             if(MaxAmplitude > 0) {
                 val intent = Intent(activity!!.applicationContext, EnterNickName::class.java)
-
+                t.cancel();
                 startActivity(intent)
             }
             else {
@@ -112,6 +136,26 @@ class HomeFragment : Fragment() {
                 t1.show()
             }
         }
+
+        button3.setOnClickListener {
+            saveData(0.0)
+            Data.UserName = ""
+            Data.MaxAmplitude = 0.0
+            text_home2.text = "0.0"
+            MaxAmplitude = 0.0
+        }
+    }
+
+    override fun onStop(){ // Fragment 전환이 되었을 때 Theard가 UI를 건들이면 죽어서 추가
+        super.onStop();
+        FragmentChangeFlag = true
+        t.cancel();
+    }
+
+    override fun onResume() {
+        super.onResume()
+        t = Timer()
+        FragmentChangeFlag = false
     }
 
     fun MaxAmplitude(Amplitude : Double) : Double {
@@ -151,12 +195,15 @@ class HomeFragment : Fragment() {
         editor.putFloat("KEY_MAXDB", ConvertDB)
             .apply()
     }
-    fun loadData() {
+    fun loadData(): Double {
         val pref = PreferenceManager.getDefaultSharedPreferences(activity!!.applicationContext)
 
         val editText1 = pref.getFloat("KEY_MAXDB", 0f)
         if(editText1 >= 0) {
             text_home2.setText(editText1.toString())
+            MaxAmplitude = editText1.toDouble()
         }
+        return MaxAmplitude
     }
+
 }
