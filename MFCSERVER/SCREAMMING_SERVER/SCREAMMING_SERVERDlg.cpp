@@ -11,6 +11,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+#include "CClientSocket.h"
 
 
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
@@ -19,7 +20,6 @@ class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
-
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
@@ -59,6 +59,7 @@ CSCREAMMINGSERVERDlg::CSCREAMMINGSERVERDlg(CWnd* pParent /*=nullptr*/)
 void CSCREAMMINGSERVERDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_MessageList);
 }
 
 BEGIN_MESSAGE_MAP(CSCREAMMINGSERVERDlg, CDialogEx)
@@ -73,9 +74,10 @@ END_MESSAGE_MAP()
 BOOL CSCREAMMINGSERVERDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	
+	m_clientList = (CListBox*)GetDlgItem(IDC_LIST1);
 
 	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
-
 	// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -100,6 +102,15 @@ BOOL CSCREAMMINGSERVERDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	if (m_ListenSocket.Create(21000, SOCK_STREAM)) { // 소켓생성
+		if (!m_ListenSocket.Listen()) {
+			AfxMessageBox(_T("ERROR:Listen() return False"));
+		}
+	}
+	else {
+		AfxMessageBox(_T("ERROR:Failed to create server socket!"));
+	}
+
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -145,6 +156,31 @@ void CSCREAMMINGSERVERDlg::OnPaint()
 		CDialogEx::OnPaint();
 	}
 }
+
+void CSCREAMMINGSERVERDlg::OnDestroy()
+{
+	CDialog::OnDestroy();
+
+	POSITION pos;
+
+	pos = m_ListenSocket.m_ptrClientSocketList.GetHeadPosition();
+	CClientSocket* pClient = NULL;
+
+	// 생성되어있는 클라이언트 소켓이 없을때까지 체크하여 소켓닫기
+	while (pos != NULL) {
+		pClient = (CClientSocket*)m_ListenSocket.m_ptrClientSocketList.GetNext(pos);
+		if (pClient != NULL) {
+			pClient->ShutDown(); // 연결된 상대방 소켓에 연결이 종료됨을 알린다. 
+			pClient->Close(); // 소켓을 닫는다
+
+			delete pClient;
+		}
+	}
+	m_ListenSocket.ShutDown();
+	m_ListenSocket.Close();
+}
+
+
 
 // 사용자가 최소화된 창을 끄는 동안에 커서가 표시되도록 시스템에서
 //  이 함수를 호출합니다.
