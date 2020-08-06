@@ -21,12 +21,11 @@ open class MainActivity : AppCompatActivity() {
     private var html = ""
     private var mHandler: Handler? = null
 
-    private var socket: Socket? = null
+    var socket: Socket? = null
+    var networkReader: BufferedReader? = null
+    var networkWriter: BufferedWriter? = null
 
-    private var networkReader: BufferedReader? = null
-    private var networkWriter: BufferedWriter? = null
-
-    private val ip = "172.30.1.54" // IP
+    private val ip = "172.30.1.34" // IP
 
     private val port = 21000 // PORT번호
 
