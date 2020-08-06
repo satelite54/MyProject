@@ -18,16 +18,16 @@ import java.net.Socket
 
 open class MainActivity : AppCompatActivity() {
 
-    private var html = ""
-    private var mHandler: Handler? = null
-
-    var socket: Socket? = null
-    var networkReader: BufferedReader? = null
-    var networkWriter: BufferedWriter? = null
-
-    private val ip = "172.30.1.34" // IP
-
-    private val port = 21000 // PORT번호
+//    private var html = ""
+//    private var mHandler: Handler? = null
+//
+//    var socket: Socket? = null
+//    var networkReader: BufferedReader? = null
+//    var networkWriter: BufferedWriter? = null
+//
+//    private val ip = "172.30.1.34" // IP
+//
+//    private val port = 21000 // PORT번호
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +45,14 @@ open class MainActivity : AppCompatActivity() {
 
         checkRecordPermission()
 
-        mHandler = Handler();
+//        mHandler = Handler();
 
-        checkUpdate.start()
+//        checkUpdate.start()
     }
     override fun onStop() {
         super.onStop()
         try {
-            socket!!.close()
+//            socket!!.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -70,39 +70,39 @@ open class MainActivity : AppCompatActivity() {
     }
 
 
-    private val checkUpdate: Thread = object : Thread() {
-        override fun run() {
-            try {
-                try {
-                    setSocket(ip, port);
-                } catch (e1: IOException) {
-                    e1.printStackTrace();
-                }
-                var line: String
-                Log.w("ChattingStart", "Start Thread")
-                while (true) {
-                    Log.w("Chatting is running", "chatting is running")
-                    line = networkReader!!.readLine()
-                    html = line
-                    mHandler!!.post(showUpdate)
-                }
-            } catch (e: Exception) {
-            }
-        }
-    }
+//    private val checkUpdate: Thread = object : Thread() {
+//        override fun run() {
+//            try {
+//                try {
+//                    setSocket(ip, port);
+//                } catch (e1: IOException) {
+//                    e1.printStackTrace();
+//                }
+//                var line: String
+//                Log.w("ChattingStart", "Start Thread")
+//                while (true) {
+//                    Log.w("Chatting is running", "chatting is running")
+//                    line = networkReader!!.readLine()
+//                    html = line
+//                    mHandler!!.post(showUpdate)
+//                }
+//            } catch (e: Exception) {
+//            }
+//        }
+//    }
 
-    private val showUpdate =
-        Runnable { Toast.makeText(this@MainActivity, "Coming word: $html", Toast.LENGTH_SHORT).show() }
-
-    @Throws(IOException::class)
-    open fun setSocket(ip: String?, port: Int) {
-        try {
-            socket = Socket(ip, port)
-            networkWriter = BufferedWriter(OutputStreamWriter(socket!!.getOutputStream()))
-            networkReader = BufferedReader(InputStreamReader(socket!!.getInputStream()))
-        } catch (e: IOException) {
-            System.out.println(e)
-            e.printStackTrace()
-        }
-    }
+//    private val showUpdate =
+//        Runnable { Toast.makeText(this@MainActivity, "Coming word: $html", Toast.LENGTH_SHORT).show() }
+//
+//    @Throws(IOException::class)
+//    open fun setSocket(ip: String?, port: Int) {
+//        try {
+//            socket = Socket(ip, port)
+//            networkWriter = BufferedWriter(OutputStreamWriter(socket!!.getOutputStream()))
+//            networkReader = BufferedReader(InputStreamReader(socket!!.getInputStream()))
+//        } catch (e: IOException) {
+//            System.out.println(e)
+//            e.printStackTrace()
+//        }
+//    }
 }

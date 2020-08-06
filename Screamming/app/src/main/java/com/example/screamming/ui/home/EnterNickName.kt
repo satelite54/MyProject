@@ -1,5 +1,6 @@
 package com.example.screamming.ui.home
 
+import android.R.id.edit
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.screamming.Data
@@ -8,6 +9,7 @@ import com.example.screamming.ui.home.tempData.EnterNickNameFlag
 import kotlinx.android.synthetic.main.activity_enter_nick_name.*
 import java.io.*
 import java.net.Socket
+
 
 class EnterNickName : AppCompatActivity() {
 
@@ -27,13 +29,24 @@ class EnterNickName : AppCompatActivity() {
             var EnterNickName = sample_EditText.text.toString()
             var Data = Data
             Data.UserName = EnterNickName
-
-            SocketSendByte.start()
+            var SocketSendByte = TheardClass()
+            if(SocketSendByte.state == Thread.State.NEW)
+                SocketSendByte.start()
         }
     }
-    private val SocketSendByte: Thread = object : Thread() {
+//    private val SocketSendByte: Thread = object : Thread() {
+    inner class TheardClass:Thread() {
         override fun run() {
             SendByte()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            socket!!.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
@@ -56,7 +69,7 @@ class EnterNickName : AppCompatActivity() {
             val oos = ObjectOutputStream(os) //byte[] 파일을 object 방식으로 통째로 전송합니다.
             var TestTemp : String = "      "
             var TempByteArray = TestTemp.toByteArray()
-            oos.writeObject(TempByteArray)
+            oos.write(TempByteArray)
 
             oos.close()
             if (os != null) {

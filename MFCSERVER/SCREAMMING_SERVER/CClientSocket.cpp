@@ -46,7 +46,7 @@ void CClientSocket::OnReceive(int nErrorCode)
         pMain->m_MessageList.SetCurSel(pMain->m_MessageList.GetCount() - 1);
 
         CListenSocket* pServerSocket = (CListenSocket*)m_pListenSocket;
-        pServerSocket->SendAllMessage(strBuffer); // 다른 클라이언트들에게 메시지 전달
+ //       pServerSocket->SendAllMessage(strBuffer); // 다른 클라이언트들에게 메시지 전달
     }
 
     CSocket::OnReceive(nErrorCode);
