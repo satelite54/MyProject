@@ -1,7 +1,7 @@
 package com.example.screamming.ui.home
 
-import android.R.id.edit
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.screamming.Data
 import com.example.screamming.R
@@ -12,6 +12,9 @@ import java.net.Socket
 
 
 class EnterNickName : AppCompatActivity() {
+
+    var os: OutputStream? = null
+    var oos: ObjectOutputStream? = null
 
     var socket: Socket? = null
     var networkReader: BufferedReader? = null
@@ -64,17 +67,32 @@ class EnterNickName : AppCompatActivity() {
     fun SendByte() {
         setSocket(ip, port)
         if (socket != null && socket!!.isConnected) {
-            val os: OutputStream? =
-                socket?.getOutputStream()  //등록한 OutputStream을 ObjectOutputStream 방식으로 사용합니다.
-            val oos = ObjectOutputStream(os) //byte[] 파일을 object 방식으로 통째로 전송합니다.
-            var TestTemp : String = "      "
-            var TempByteArray = TestTemp.toByteArray()
-            oos.write(TempByteArray)
-
-            oos.close()
-            if (os != null) {
-                os.close()
+//            os = socket?.getOutputStream()  //등록한 OutputStream을 ObjectOutputStream 방식으로 사용합니다.
+//            oos = ObjectOutputStream(os) //byte[] 파일을 object 방식으로 통째로 전송합니다.
+            var socket_out : BufferedWriter? = null
+            try {
+                socket_out = BufferedWriter(OutputStreamWriter(socket!!.getOutputStream(), "euc-kr"))
+            } catch (e: IOException) {
+                Toast.makeText(this,"서버 연결 오류", Toast.LENGTH_SHORT)
+                e.printStackTrace()
             }
+            var TestTemp : String = sample_EditText.toString()
+            var TempByteArray = TestTemp.toByteArray()
+            if (socket_out != null) {
+                socket_out.write(TestTemp)
+                socket_out.flush()
+            }
+            socket_out?.close()
+//            var TempByteArraySize = TempByteArray.size
+//            val size = ByteArray(2)
+//            size[0] = TempByteArraySize.toByte()
+//            size[1] = ((TempByteArraySize shr 8).toByte())
+////            oos!!.write(TempByteArray)
+//            oos!!.write(TempByteArraySize)
+//            oos!!.write(TempByteArray)
+
+//            oos!!.close()s
+//            os?.close()
         }
     }
 }
