@@ -20,7 +20,7 @@ class EnterNickName : AppCompatActivity() {
     var networkReader: BufferedReader? = null
     var networkWriter: BufferedWriter? = null
 
-    private val ip = "172.30.1.34" // IP
+    private val ip = "27.115.252.90:100" // IP
 
     private val port = 21000 // PORT번호
 
@@ -47,6 +47,7 @@ class EnterNickName : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         try {
+            if(socket!!.isConnected)
             socket!!.close()
         } catch (e: IOException) {
             e.printStackTrace()
@@ -57,8 +58,6 @@ class EnterNickName : AppCompatActivity() {
     open fun setSocket(ip: String?, port: Int) {
         try {
             socket = Socket(ip, port)
-            networkWriter = BufferedWriter(OutputStreamWriter(socket!!.getOutputStream()))
-            networkReader = BufferedReader(InputStreamReader(socket!!.getInputStream()))
         } catch (e: IOException) {
             System.out.println(e)
             e.printStackTrace()
@@ -78,21 +77,12 @@ class EnterNickName : AppCompatActivity() {
             }
             var TestTemp : String = sample_EditText.toString()
             var TempByteArray = TestTemp.toByteArray()
+
             if (socket_out != null) {
                 socket_out.write(TestTemp)
                 socket_out.flush()
             }
             socket_out?.close()
-//            var TempByteArraySize = TempByteArray.size
-//            val size = ByteArray(2)
-//            size[0] = TempByteArraySize.toByte()
-//            size[1] = ((TempByteArraySize shr 8).toByte())
-////            oos!!.write(TempByteArray)
-//            oos!!.write(TempByteArraySize)
-//            oos!!.write(TempByteArray)
-
-//            oos!!.close()s
-//            os?.close()
         }
     }
 }

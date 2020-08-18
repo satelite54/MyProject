@@ -1,0 +1,12 @@
+﻿  pch.cpp
+  CClientSocket.cpp
+  CListenSocket.cpp
+C:\github\MFCSERVER\SCREAMMING_SERVER\CListenSocket.cpp(32,79): warning C4311: '형식 캐스트': 'POSITION'에서 'int'(으)로 포인터가 잘립니다.
+C:\github\MFCSERVER\SCREAMMING_SERVER\CListenSocket.cpp(32,79): warning C4302: '형식 캐스트': 'POSITION'에서 'int'(으)로 잘립니다.
+C:\github\MFCSERVER\SCREAMMING_SERVER\CListenSocket.cpp(62,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\github\MFCSERVER\SCREAMMING_SERVER\CListenSocket.cpp(63,62): warning C4311: '형식 캐스트': 'POSITION'에서 'int'(으)로 포인터가 잘립니다.
+C:\github\MFCSERVER\SCREAMMING_SERVER\CListenSocket.cpp(63,62): warning C4302: '형식 캐스트': 'POSITION'에서 'int'(으)로 잘립니다.
+  SCREAMMING_SERVER.cpp
+  SCREAMMING_SERVERDlg.cpp
+  코드를 생성하고 있습니다...
+  SCREAMMING_SERVER.vcxproj -> C:\github\MFCSERVER\SCREAMMING_SERVER\x64\Debug\SCREAMMING_SERVER.exe
